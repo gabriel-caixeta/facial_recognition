@@ -2,8 +2,13 @@ import numpy as np
 import cv2
 import datetime
 import os
+from find_faces import find_faces
 
 TIME_INTERVAL = 3
+
+cascade_files = ['C:/Users/Gabriel/Documents/Projects/facial_recognition/data/haarcascade_frontalface_alt.xml',
+                 'C:/Users/Gabriel/Documents/Projects/facial_recognition/data/haarcascade_frontalface_default.xml',
+                 'C:/Users/Gabriel/Documents/Projects/facial_recognition/data/haarcascade_frontalface_alt2.xml']
 
 cascade_path = 'C:/Users/Gabriel/Documents/Projects/facial_recognition/data/haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(cascade_path)
@@ -29,7 +34,9 @@ while True:
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # find faces
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5)
+    # faces = face_cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5)
+    faces = find_faces(gray)
+
     for (x,y,w,h) in faces:
         roi_gray = gray[y:y+h,x:x+w]
 

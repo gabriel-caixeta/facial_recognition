@@ -18,6 +18,7 @@ def find_faces(gray_frame):
             found_faces = faces
     return found_faces
 
+
 def is_overlapping(rec_a,rec_b):
     (a_xi,a_yi,a_w,a_h) = rec_a
     (b_xi,b_yi,b_w,b_h) = rec_b

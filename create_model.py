@@ -3,6 +3,7 @@ import os
 import pickle
 import numpy as np
 from PIL import Image
+from find_faces import find_faces
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 image_dir = os.path.join(BASE_DIR, 'users')
@@ -31,8 +32,9 @@ for root, dirs, files in os.walk(image_dir):
             print(label)
             pil_image = Image.open(path).convert('L')
             image_array = np.array(pil_image, 'uint8')
-            faces = face_cascade.detectMultiScale(image_array, scaleFactor=1.5, minNeighbors=5)
-
+            # faces = face_cascade.detectMultiScale(image_array, scaleFactor=1.5, minNeighbors=5)
+            faces = find_faces(image_array
+                               )
             for (x,y,w,h) in faces:
                 roi_train = image_array[y:y+h, x:x+w]
                 x_train.append(roi_train)
